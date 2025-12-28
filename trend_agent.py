@@ -18,9 +18,7 @@ from datetime import datetime, timedelta
 
 
 def generate_trend_report(target_date):
-    """
-    Generates a 30-day trend report ending on target_date.
-    """
+    
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     end_date = datetime.strptime(target_date, "%Y-%m-%d")
@@ -34,7 +32,7 @@ def generate_trend_report(target_date):
     all_topics = set()
     daily_data = {}
 
-    # Load daily topic files
+   
     for date in date_list:
         file_path = os.path.join(DAILY_TOPIC_DIR, f"{date}.json")
         if os.path.exists(file_path):
@@ -46,7 +44,7 @@ def generate_trend_report(target_date):
         daily_data[date] = daily_counts
         all_topics.update(daily_counts.keys())
 
-    # Write CSV
+    
     output_file = os.path.join(OUTPUT_DIR, f"trend_report_{target_date}.csv")
 
     with open(output_file, "w", encoding="utf-8") as f:
@@ -60,4 +58,5 @@ def generate_trend_report(target_date):
             f.write(",".join(row) + "\n")
 
     print(f"[OK] Trend report generated: {output_file}")
+
 
