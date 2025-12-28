@@ -1,7 +1,5 @@
 def deduplicate_topics(raw_topics):
-    """
-    Deduplicates and canonicalizes topics.
-    """
+    
     return raw_topics
 import json
 import os
@@ -28,9 +26,7 @@ def similarity(a, b):
 
 
 def deduplicate_topics(raw_topics):
-    """
-    Maps raw topics to canonical topics using semantic similarity.
-    """
+    
     registry = load_topic_registry()
     canonical_topics = []
 
@@ -42,7 +38,7 @@ def deduplicate_topics(raw_topics):
             score = similarity(topic, canonical)
 
             if score >= SIMILARITY_THRESHOLD:
-                # Merge into existing canonical topic
+               
                 if topic not in variants:
                     variants.append(topic)
                 canonical_topics.append(canonical)
@@ -50,9 +46,10 @@ def deduplicate_topics(raw_topics):
                 break
 
         if not matched:
-            # Create new canonical topic
+            
             registry[topic] = [topic]
             canonical_topics.append(topic)
 
     save_topic_registry(registry)
     return canonical_topics
+
